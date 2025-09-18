@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Sidebar() {
-  const [activeDropdown, setActiveDropdown] = useState("newTrip"); // Only one dropdown can be active at a time
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const location = useLocation();
 
   const toggleDropdown = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
+
+  // Auto-open dropdown based on current route
+  useEffect(() => {
+    const currentPath = location.pathname;
+    
+    // Check which menu item should be active based on current route
+    if (currentPath === '/flights' || currentPath === '/hotels' || currentPath === '/cars' || currentPath === '/buses' || currentPath === '/rails') {
+      setActiveDropdown('orderHistory');
+    } else if (currentPath === '/users') {
+      setActiveDropdown('orderHistory'); // You can add a specific menu for users if needed
+    } else {
+      setActiveDropdown(null);
+    }
+  }, [location.pathname]);
 
   // Menu data structure
   const menuItems = [
@@ -57,8 +73,11 @@ export default function Sidebar() {
         />
       ),
       subItems: [
-        { title: "Recent Orders", href: "#" },
-        { title: "Order Details", href: "#" },
+        { title: "Flights", href: "/flights" },
+        { title: "Hotels", href: "/hotels" },
+        { title: "Cars", href: "/cars" },
+        { title: "Buses", href: "buses" },
+        { title: "Rails", href: "rails" },
       ],
     },
     {
@@ -164,15 +183,22 @@ export default function Sidebar() {
 
               {activeDropdown === item.id && (
                 <div className="ml-8 mt-2 space-y-1 flex flex-col gap-2">
-                  {item.subItems.map((subItem, index) => (
-                    <a
-                      key={index}
-                      href={subItem.href}
-                      className="block px-4 py-2 text-sm text-gray-500 border-l-2 border-gray-200 hover:text-black transition-all duration-200"
-                    >
-                      {subItem.title}
-                    </a>
-                  ))}
+                  {item.subItems.map((subItem, index) => {
+                    const isActive = location.pathname === subItem.href;
+                    return (
+                      <a
+                        key={index}
+                        href={subItem.href}
+                        className={`block px-4 py-2 text-sm transition-all duration-200 ${
+                          isActive 
+                            ? 'text-black bg-yellow-100 border-l-2 border-yellow-500 font-medium' 
+                            : 'text-gray-500 border-l-2 border-gray-200 hover:text-black'
+                        }`}
+                      >
+                        {subItem.title}
+                      </a>
+                    );
+                  })}
                 </div>
               )}
             </div>
