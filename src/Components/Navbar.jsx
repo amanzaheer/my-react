@@ -17,6 +17,7 @@ export default function Navbar() {
               <h1 className="text-3xl font-black tracking-wide bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-400 bg-clip-text text-transparent relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-indigo-500 after:via-purple-500 after:to-pink-400 after:rounded-sm">
                 oggaair
               </h1>
+              {/* <img src="/img.1 (3).jpeg" alt="logo" className="w-10 h-10" /> */}
             </div>
 
             {/* Dashboard Heading - More space after sidebar */}

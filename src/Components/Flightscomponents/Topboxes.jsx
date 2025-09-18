@@ -77,7 +77,7 @@ export default function Topboxes() {
   }
 
   return (
-    <div className="px-6">
+    <div className="">
       {/* Top Small Rounded Boxes */}
       <div className="flex flex-wrap gap-3 mb-8">
         {menuItems.map((item) => (
