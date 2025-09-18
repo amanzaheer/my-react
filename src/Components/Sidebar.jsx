@@ -54,11 +54,11 @@ export default function Sidebar() {
       ),
       iconTransform: "transform rotate-12",
       subItems: [
-        { title: "Payment Methods", href: "#" },
-        { title: "Transaction History", href: "#" },
-        { title: "Refunds", href: "#" },
-        { title: "Payment Settings", href: "#" },
-        { title: "Billing", href: "#" },
+        // { title: "Payment Methods", href: "#" },
+        { title: "Transaction History", href: "/transaction-history" },
+        { title: "Create Payment Link", href: "/create-payment-link" },
+        // { title: "Payment Settings", href: "#" },
+        // { title: "Billing", href: "#" },
       ],
     },
     {

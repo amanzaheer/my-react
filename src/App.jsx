@@ -5,6 +5,8 @@ import Flights from './Pages/Flights'
 import Signin from './Pages/Signin'
 import Signup from './Pages/Signup'
 import Users from './Pages/Users'
+import Customers from './Pages/Customers'
+import Transactionhistory from './Pages/Transactionhistory'
 
 export default function App() {
   return (
@@ -16,6 +18,9 @@ export default function App() {
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/users' element={<Users />} />
+        <Route path='/customers' element={<Customers />} />
+        {/* <Route path='/admin-fund' element={ />} /> */}
+        <Route path='/transaction-history' element={<Transactionhistory />} />
       </Routes>
     </Router>
   )
