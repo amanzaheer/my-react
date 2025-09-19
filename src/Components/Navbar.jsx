@@ -124,7 +124,7 @@ export default function Navbar() {
               className="p-3 text-gray-500 hover:text-red-600 bg-gray-100 hover:bg-red-50 rounded-full transition-colors duration-200"
               title="Logout"
             >
-              <LogOut className="h-5 w-5" />
+              <Power className="h-5 w-5" />
             </button>
           </div>
         </div>
