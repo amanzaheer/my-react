@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { setAuthData, isAuthenticated } from '../utils/auth'
 
 export default function Signup() {
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -28,6 +31,13 @@ export default function Signup() {
     setShowPassword(!showPassword)
   }
 
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/dashboard', { replace: true })
+    }
+  }, [navigate])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -35,7 +45,7 @@ export default function Signup() {
     setSuccess('')
 
     // Basic validation
-    if (!formData.fullName || !formData.username || !formData.email || !formData.phone || !formData.password) {
+    if (!formData.fullName || !formData.username || !formData.email || !formData.phone || !formData.password || !formData.role) {
       setError('Please fill in all fields')
       setLoading(false)
       return
@@ -79,11 +89,23 @@ export default function Signup() {
       return
     }
 
+    // Role validation
+    const validRoles = ['user', 'admin', 'agent']
+    if (!validRoles.includes(formData.role)) {
+      setError('Please select a valid role')
+      setLoading(false)
+      return
+    }
+
     try {
-      // Prepare data for API (clean phone number)
+      // Prepare data for API (clean and format data)
       const apiData = {
-        ...formData,
-        phone: formData.phone.replace(/\D/g, '') // Remove all non-digits
+        fullName: formData.fullName.trim(),
+        username: formData.username.trim(),
+        email: formData.email.trim().toLowerCase(),
+        phone: formData.phone.replace(/\D/g, ''), // Remove all non-digits
+        password: formData.password,
+        role: formData.role
       }
 
       console.log('Sending data to API:', apiData)
@@ -112,19 +134,28 @@ export default function Signup() {
 
       if (response.ok) {
         // Success
-        setSuccess('Signup successful! You can now sign in.')
         console.log('Signup successful:', data)
-        // Reset form
-        setFormData({
-          fullName: '',
-          username: '',
-          email: '',
-          phone: '',
-          password: '',
-          role: 'user'
-        })
-        // Redirect to signin page after 2 seconds
-        setTimeout(() => window.location.href = '/signin', 2000)
+        
+        // If the API returns token and user data, store them and redirect to dashboard
+        if (data.token && data.user) {
+          setAuthData(data.token, data.user)
+          setSuccess('Signup successful! Redirecting to dashboard...')
+          setTimeout(() => navigate('/dashboard', { replace: true }), 1500)
+        } else {
+          // If no token returned, redirect to signin page
+          setSuccess('Signup successful! You can now sign in.')
+          // Reset form
+          setFormData({
+            fullName: '',
+            username: '',
+            email: '',
+            phone: '',
+            password: '',
+            role: 'user'
+          })
+          // Redirect to signin page after 2 seconds
+          setTimeout(() => navigate('/signin', { replace: true }), 2000)
+        }
       } else {
         // Error from API - handle different error formats
         let errorMessage = 'Signup failed. Please try again.'
@@ -142,6 +173,12 @@ export default function Signup() {
           }
         } else if (data.details) {
           errorMessage = data.details
+        } else if (response.status === 400) {
+          errorMessage = 'Invalid data provided. Please check your information.'
+        } else if (response.status === 409) {
+          errorMessage = 'Username or email already exists. Please try different credentials.'
+        } else if (response.status === 500) {
+          errorMessage = 'Server error. Please try again later.'
         }
 
         setError(errorMessage)

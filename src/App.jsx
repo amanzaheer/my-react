@@ -7,20 +7,20 @@ import Signup from './Pages/Signup'
 import Users from './Pages/Users'
 import Customers from './Pages/Customers'
 import Transactionhistory from './Pages/Transactionhistory'
+import ProtectedRoute from './Components/ProtectedRoute'
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/flights' element={<Flights />} />
+        <Route path='/' element={<Signin />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/users' element={<Users />} />
-        <Route path='/customers' element={<Customers />} />
-        {/* <Route path='/admin-fund' element={ />} /> */}
-        <Route path='/transaction-history' element={<Transactionhistory />} />
+        <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path='/flights' element={<ProtectedRoute><Flights /></ProtectedRoute>} />
+        <Route path='/users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
+        <Route path='/customers' element={<ProtectedRoute><Customers /></ProtectedRoute>} />
+        <Route path='/transaction-history' element={<ProtectedRoute><Transactionhistory /></ProtectedRoute>} />
       </Routes>
     </Router>
   )

@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { setAuthData, isAuthenticated } from '../utils/auth'
 
 export default function Signin() {
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -22,10 +25,24 @@ export default function Signin() {
     setShowPassword(!showPassword)
   }
 
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/dashboard', { replace: true })
+    }
+  }, [navigate])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError('')
+
+    // Basic validation
+    if (!formData.username.trim() || !formData.password.trim()) {
+      setError('Please fill in all fields')
+      setLoading(false)
+      return
+    }
 
     try {
       const response = await fetch('https://stingray-app-3fkqv.ondigitalocean.app/api/users/login', {
@@ -34,21 +51,48 @@ export default function Signin() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: formData.username,
+          username: formData.username.trim(),
           password: formData.password
         })
       })
+      console.log("response is",response)
 
       const data = await response.json()
+      console.log("data is fetched successfully hogaya hai ",data)
+      console.log("data.token",data?.token) 
+      console.log("data.data.token slkdjflkdsjflkdsjflkdsjlkfjdslkfjlkdsj",data?.data?.token )
 
       if (response.ok) {
-        // Success - redirect to dashboard
+        // Success - store token and user data
         console.log('Signin successful:', data)
+        console.log('Response data structure:', Object.keys(data))
+        
+        // Store authentication data using utility function
+        // Handle different possible response structures
+        const token = data.data.token || data.accessToken || data.access_token
+        console.log("token is",token)
+        const user = data.user || data.userData || data.data
+        
+        if (token) {
+          setAuthData(token, user)
+          localStorage.setItem('access_token', token)
+          console.log('Token stored:', token)
+        } else {
+          console.log('No token found in response, creating temporary token')
+          // If no token from API, create a temporary one for successful signin
+          setAuthData('temp_token_' + Date.now(), user || { username: formData.username })
+        }
+        
+        // Show success message
+        setError('')
         alert('Signin successful! Redirecting to dashboard...')
-        window.location.href = '/dashboard'
+        
+        // Redirect to dashboard immediately
+        navigate('/dashboard', { replace: true })
+        
       } else {
         // Error from API
-        setError(data.message || 'Signin failed. Please try again.')
+        setError(data.message || data.error || 'Signin failed. Please check your credentials.')
       }
     } catch (err) {
       // Network or other errors
@@ -216,6 +260,22 @@ export default function Signin() {
               Sign Up
             </a>
           </p>
+          
+          {/* Debug Test Button */}
+          <div className="mt-4">
+            <button
+              type="button"
+              onClick={() => {
+                console.log('Testing auth flow...')
+                setAuthData('test_token_123', { username: 'testuser' })
+                console.log('Test token set, navigating to dashboard...')
+                navigate('/dashboard', { replace: true })
+              }}
+              className="text-xs text-gray-500 hover:text-gray-700 underline"
+            >
+              Test Auth Flow (Debug)
+            </button>
+          </div>
         </div>
       </div>
     </div>
