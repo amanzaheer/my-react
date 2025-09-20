@@ -8,9 +8,7 @@ export default function Users() {
     <Layout>
     <div>
       <Topboxes />
-      <Table/>
-      
-
+      <Table />
     </div>
     </Layout>
   )

@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { Bell, Globe, Power, ChevronDown, LogOut } from "lucide-react";
+import { logout, getUserData } from "../utils/auth";
 
 export default function Navbar() {
   const [isPowerOn, setIsPowerOn] = useState(false);
+  const userData = getUserData();
 
   const togglePower = () => {
     setIsPowerOn(!isPowerOn);
+  };
+
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to logout?')) {
+      logout();
+    }
   };
 
   return (
@@ -112,8 +120,9 @@ export default function Navbar() {
 
             {/* Logout Icon */}
             <button
-              //   onClick={handleLogout}
+              onClick={handleLogout}
               className="p-3 text-gray-500 hover:text-red-600 bg-gray-100 hover:bg-red-50 rounded-full transition-colors duration-200"
+              title="Logout"
             >
               <Power className="h-5 w-5" />
             </button>
