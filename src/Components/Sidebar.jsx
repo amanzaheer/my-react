@@ -37,8 +37,8 @@ export default function Sidebar() {
         />
       ),
       subItems: [
-        { title: "Create Trip", href: "#" },
-        { title: "Trip Templates", href: "#" },
+        { title: "CreateTrip", href: "/create-trip" },
+        { title: "TripTemplates", href: "/trip-templates" },
       ],
     },
     {
@@ -56,7 +56,7 @@ export default function Sidebar() {
       subItems: [
         // { title: "Payment Methods", href: "#" },
         { title: "Transaction History", href: "/transaction-history" },
-        { title: "Create Payment Link", href: "/create-payment-link" },
+        { title: "Createpaymentlink", href: "/create-payment-link" },
         // { title: "Payment Settings", href: "#" },
         // { title: "Billing", href: "#" },
       ],
@@ -76,8 +76,8 @@ export default function Sidebar() {
         { title: "Flights", href: "/flights" },
         { title: "Hotels", href: "/hotels" },
         { title: "Cars", href: "/cars" },
-        { title: "Buses", href: "buses" },
-        { title: "Rails", href: "rails" },
+        { title: "Buses", href: "/buses" },
+        { title: "Rails", href: "/rails" },
       ],
     },
     {
@@ -92,8 +92,8 @@ export default function Sidebar() {
         />
       ),
       subItems: [
-        { title: "Help Center", href: "#" },
-        { title: "Contact Us", href: "#" },
+        { title: "Support", href: "/support" },
+       
       ],
     },
     {
@@ -108,8 +108,8 @@ export default function Sidebar() {
         />
       ),
       subItems: [
-        { title: "Analytics", href: "#" },
-        { title: "Financial Reports", href: "#" },
+        { title: "Analytics", href: "/analytics" },
+        { title: "FinancialReports", href: "/financial-reports" },
       ],
     },
     {
@@ -124,8 +124,8 @@ export default function Sidebar() {
         />
       ),
       subItems: [
-        { title: "Home Page", href: "#" },
-        { title: "About Page", href: "#" },
+        { title: "Promotions", href: "/promotions" },
+        { title: "Coupons", href: "/coupons" },
       ],
     },
   ];

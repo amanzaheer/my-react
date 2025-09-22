@@ -8,6 +8,18 @@ import Users from './Pages/Users'
 import Customers from './Pages/Customers'
 import Transactionhistory from './Pages/Transactionhistory'
 import ProtectedRoute from './Components/ProtectedRoute'
+import Hotels from './Pages/Hotels'
+import Buses from './Pages/Buses'
+import Cars from './Pages/Cars'
+import Rails from './Pages/Rails'
+import Createpaymentlink from './Pages/Createpaymentlink'
+import Support from './Pages/Support'
+import CreateTrip from './Pages/CreateTrip'
+import TripTemplates from './Pages/TripTemplates'
+import FinancialReports from './Pages/FinancialReports'
+import Analytics from './Pages/Analytics'
+import Promotions from './Pages/Promotions'
+import Coupons from './Pages/Coupons'
 
 export default function App() {
   return (
@@ -21,6 +33,19 @@ export default function App() {
         <Route path='/users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
         <Route path='/customers' element={<ProtectedRoute><Customers /></ProtectedRoute>} />
         <Route path='/transaction-history' element={<ProtectedRoute><Transactionhistory /></ProtectedRoute>} />
+        <Route path='/hotels' element={<ProtectedRoute><Hotels /></ProtectedRoute>} />
+        <Route path='/buses' element={<ProtectedRoute><Buses /></ProtectedRoute>} />
+        <Route path='/cars' element={<ProtectedRoute><Cars /></ProtectedRoute>} />
+        <Route path='/rails' element={<ProtectedRoute><Rails /></ProtectedRoute>} />
+        <Route path='/create-payment-link' element={<ProtectedRoute><Createpaymentlink /></ProtectedRoute>} />
+        <Route path='/support' element={<ProtectedRoute><Support /></ProtectedRoute>} />
+        <Route path='/promotions' element={<ProtectedRoute><Promotions /></ProtectedRoute>} />
+        <Route path='/coupons' element={<ProtectedRoute><Coupons /></ProtectedRoute>} />
+        <Route path='/create-trip' element={<ProtectedRoute><CreateTrip /></ProtectedRoute>} />
+        <Route path='/trip-templates' element={<ProtectedRoute><TripTemplates /></ProtectedRoute>} />
+        <Route path='/financial-reports' element={<ProtectedRoute><FinancialReports /></ProtectedRoute>} />
+        <Route path='/analytics' element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+        
       </Routes>
     </Router>
   )
