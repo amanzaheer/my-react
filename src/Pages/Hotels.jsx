@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../Components/Layout";
 import Table from "../Components/Hotelscomponent/Table";
+import Topboxes from "../Components/Flightscomponents/Topboxes";
 // import Table from "../Components/Hotelscomponents/Table";
 
 export default function Hotels() {
@@ -91,7 +92,8 @@ export default function Hotels() {
 
   return (
     <Layout>
-      <div className="p-4">
+      <Topboxes/>
+      <div className="p-2">
         <Table title="Hotels" headers={headers} rows={rows} />
       </div>
     </Layout>

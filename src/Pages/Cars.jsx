@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../Components/Layout";
 import Table from "../Components/Carscomponent/Table";
+import Topboxes from "../Components/Flightscomponents/Topboxes";
 
 export default function Cars() {
   const headers = [
@@ -90,7 +91,8 @@ export default function Cars() {
 
   return (
     <Layout>
-      <div className="p-4">
+      <Topboxes/>
+      <div className="p-2">
         <Table title="Cars" headers={headers} rows={rows} />
       </div>
     </Layout>

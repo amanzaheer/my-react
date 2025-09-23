@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../Components/Layout";
 import Table from "../Components/Railscomponent/Table";
+import Topboxes from "../Components/Flightscomponents/Topboxes";
 // import Table from "../Components/Railscomponents/Table"; // ✅ adjust path to where you save the table
 
 export default function Rails() {
@@ -91,7 +92,8 @@ export default function Rails() {
 
   return (
     <Layout>
-      <div className="p-4">
+      <Topboxes/>
+      <div className="p-2">
         <Table title="Rails" headers={headers} rows={rows} />
       </div>
     </Layout>

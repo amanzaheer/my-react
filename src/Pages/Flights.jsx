@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../Components/Layout";
 import Table from "../Components/Flightscomponents/Table";
+import Topboxes from "../Components/Flightscomponents/Topboxes";
 
 export default function Flights() {
   const headers = [
@@ -90,7 +91,8 @@ export default function Flights() {
 
   return (
     <Layout>
-      <div className="p-4">
+      <Topboxes/>
+      <div className="p-2">
         {/* ✅ now each row has id + data */}
         <Table title="Flights" headers={headers} rows={rows} />
       </div>

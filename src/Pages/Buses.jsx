@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../Components/Layout";
 import Table from "../Components/Busescomponent/Table";
+import Topboxes from "../Components/Flightscomponents/Topboxes";
 // import Table from "../Components/Busescomponent/Table";
 
 export default function Buses() {
@@ -91,7 +92,8 @@ export default function Buses() {
 
   return (
     <Layout>
-      <div className="p-4">
+      <Topboxes/>
+      <div className="p-2">
         <Table title="Buses" headers={headers} rows={rows} />
       </div>
     </Layout>
