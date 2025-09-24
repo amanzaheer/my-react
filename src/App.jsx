@@ -18,7 +18,7 @@ import Support from './Pages/Support'
 import CreateTrip from './Pages/CreateTrip'
 import TripTemplates from './Pages/TripTemplates'
 import FinancialReports from './Pages/FinancialReports'
-import Analytics from './Pages/Analytics'
+// import Analytics from './Pages/Analytics'
 import Promotions from './Pages/Promotions'
 import Coupons from './Pages/Coupons'
 import Flightsdetail from './Pages/Flightsdetail'
@@ -26,6 +26,7 @@ import Hotelsdetail from './Pages/Hotelsdetail'
 import Carsdetail from './Pages/Carsdetail'
 import Busesdetail from './Pages/Busesdetail'
 import Railsdetail from './Pages/Railsdetail'
+import Reports from './Pages/Reports'
 
 
 export default function App() {
@@ -56,7 +57,7 @@ export default function App() {
         <Route path='/create-trip' element={<ProtectedRoute><CreateTrip /></ProtectedRoute>} />
         <Route path='/trip-templates' element={<ProtectedRoute><TripTemplates /></ProtectedRoute>} />
         <Route path='/financial-reports' element={<ProtectedRoute><FinancialReports /></ProtectedRoute>} />
-        <Route path='/analytics' element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+        <Route path='/reports' element={<ProtectedRoute><Reports /></ProtectedRoute>} />
         
 
       </Routes>
