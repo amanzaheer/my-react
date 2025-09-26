@@ -11,5 +11,5 @@ export default function Reports() {
     <Table/>
     </div>
     </Layout>
-  )
+  ) 
 }
