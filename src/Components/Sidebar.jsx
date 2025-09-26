@@ -108,8 +108,8 @@ export default function Sidebar() {
         />
       ),
       subItems: [
-        { title: "Analytics", href: "/analytics" },
-        { title: "FinancialReports", href: "/financial-reports" },
+        { title: "Reports", href: "/reports" },
+        // { title: "FinancialReports", href: "/financial-reports" },
       ],
     },
     {

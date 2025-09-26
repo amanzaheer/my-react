@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import "react-datepicker/dist/react-datepicker.css";
 @theme {
   --color-custom-green: #D4FE5B;
-}
+};
+
