@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Bell, Globe, Power, ChevronDown, LogOut } from "lucide-react";
 import { logout, getUserData } from "../utils/auth";
+import ConfirmModal from "./Common/ConfirmModal";
 
 export default function Navbar() {
   const [isPowerOn, setIsPowerOn] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const userData = getUserData();
 
   const togglePower = () => {
@@ -11,9 +13,12 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      logout();
-    }
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
+    logout();
   };
 
   return (
@@ -129,6 +134,17 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      {/* Logout Confirmation Modal */}
+      <ConfirmModal
+        isOpen={showLogoutModal}
+        onClose={() => setShowLogoutModal(false)}
+        onConfirm={confirmLogout}
+        title="Confirm Logout"
+        message="Are you sure you want to logout? You will need to sign in again to access your account."
+        confirmText="Logout"
+        cancelText="Cancel"
+      />
     </nav>
   );
 }
