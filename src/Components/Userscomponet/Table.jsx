@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ArrowBigLeft, ArrowUpLeftFromSquare } from "lucide-react";
 
+// API Configuration
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export default function Table() {
   const [searchTerm, setSearchTerm] = useState("");
   const [teamMembers, setTeamMembers] = useState([]);
@@ -21,7 +24,7 @@ export default function Table() {
       setLoading(true);
       const token = localStorage.getItem("authToken");
       const response = await axios.get(
-        "https://stingray-app-3fkqv.ondigitalocean.app/api/users",
+        `${API_BASE_URL}/api/users`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -61,7 +64,7 @@ export default function Table() {
     try {
       const token = localStorage.getItem("authToken");
       const response = await fetch(
-        "https://stingray-app-3fkqv.ondigitalocean.app/api/users/register",
+        `${API_BASE_URL}/api/users/register`,
         {
           method: "POST",
           headers: {

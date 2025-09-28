@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { setAuthData, isAuthenticated } from '../utils/auth'
 
+// API Configuration
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export default function Signup() {
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
@@ -110,7 +113,7 @@ export default function Signup() {
 
       console.log('Sending data to API:', apiData)
 
-      const response = await fetch('https://stingray-app-3fkqv.ondigitalocean.app/api/users/signup', {
+      const response = await fetch(`${API_BASE_URL}/api/users/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
